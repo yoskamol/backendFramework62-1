@@ -42,7 +42,7 @@ router.post("/register", (req, res) => {
     var nameVar = req.body.username; // name คือตัวที่พิมลง postman
     var passwordVar = req.body.password; // password พิมค่าลง postman
     MongoClient.connect(
-        "mongodb+srv://weerayut:22374736@cluster0-4wunc.mongodb.net/newDatabase62?retryWrites=true", {
+        "mongodb+srv://weerayut:22374736@cluster0-4wunc.gcp.mongodb.net/test?retryWrites=true", {
             useNewUrlParser: true
         },
         function (err, db) {
@@ -65,18 +65,53 @@ router.post("/register", (req, res) => {
             };
             dbo.collection("userLoginTable").insertOne(userObj, function (err, result) {
                 if (err) {
-
                     res.send({
-
                         status: false
-
                     });
-
                 }
                 res.send({
                     status: "store success",
                     name: nameVar //response
                 });
+            });
+            db.close();
+        }
+    );
+});
+
+router.post("/login", (req, res) => {
+    var nameVar = req.body.username; // name คือตัวที่พิมลง postman
+    var passwordVar = req.body.password; // password พิมค่าลง postman
+    MongoClient.connect(
+        "mongodb+srv://weerayut:22374736@cluster0-4wunc.gcp.mongodb.net/test?retryWrites=true", {
+            useNewUrlParser: true
+        },
+        function (err, db) {
+            if (err) {
+                res.sendStatus(404);
+                return;
+            }
+            let dbo = db.db("newDatabase62");
+            dbo.collection("userLoginTable").findOne({
+                username: nameVar,
+                password: passwordVar
+            }, function (err, result) {
+                console.log(result);
+
+                if (err) {
+                    res.send({
+                        status: false
+                    });
+                }
+                if (result) {
+                    res.send({
+                        status: true
+                    });
+                } else {
+                    res.send({
+                        status: false
+                    });
+                }
             });
             db.close();
         }
