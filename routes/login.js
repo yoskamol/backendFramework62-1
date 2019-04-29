@@ -83,15 +83,16 @@ router.post("/login", (req, res) => {
     var nameVar = req.body.username; // name คือตัวที่พิมลง postman
     var passwordVar = req.body.password; // password พิมค่าลง postman
     MongoClient.connect(
-        "mongodb+srv://weerayut:22374736@cluster0-4wunc.gcp.mongodb.net/newDatabase62?retryWrites=true", {
-            useNewUrlParser: true
+        //"mongodb+srv://kanboakeaw:1234@cluster0-djwuq.gcp.mongodb.net/test?retryWrites=true", {
+            "mongodb://kanboakeaw:1234@localhost/frameworkdb?retryWrites=true", { 
+        useNewUrlParser: true
         },
         function (err, db) {
             if (err) {
                 res.sendStatus(404);
                 return;
             }
-            let dbo = db.db("newDatabase62");
+            let dbo = db.db("frameworkdb");
             dbo.collection("userLoginTable").findOne({
                 username: nameVar,
                 password: passwordVar
