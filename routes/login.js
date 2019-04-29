@@ -42,7 +42,7 @@ router.post("/register", (req, res) => {
     var nameVar = req.body.username; // name คือตัวที่พิมลง postman
     var passwordVar = req.body.password; // password พิมค่าลง postman
     MongoClient.connect(
-        "mongodb+srv://weerayut:22374736@cluster0-4wunc.gcp.mongodb.net/test?retryWrites=true", {
+        "mongodb+srv://yoskamol9786:ple140327@cluster0-h0qzj.gcp.mongodb.net/frameworkdb62?retryWrites=true", {
             useNewUrlParser: true
         },
         function (err, db) {
@@ -83,7 +83,7 @@ router.post("/login", (req, res) => {
     var nameVar = req.body.username; // name คือตัวที่พิมลง postman
     var passwordVar = req.body.password; // password พิมค่าลง postman
     MongoClient.connect(
-        "mongodb+srv://weerayut:22374736@cluster0-4wunc.gcp.mongodb.net/newDatabase62?retryWrites=true", {
+        "mongodb+srv://yoskamol9786:ple140327@cluster0-h0qzj.gcp.mongodb.net/frameworkdb62?retryWrites=true", {
             useNewUrlParser: true
         },
         function (err, db) {
