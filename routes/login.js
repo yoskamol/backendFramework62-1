@@ -42,7 +42,7 @@ router.post("/register", (req, res) => {
     var nameVar = req.body.username; // name คือตัวที่พิมลง postman
     var passwordVar = req.body.password; // password พิมค่าลง postman
     MongoClient.connect(
-        "mongodb+srv://weerayut:22374736@cluster0-4wunc.gcp.mongodb.net/test?retryWrites=true", {
+        "mongodb+srv://kanboakeaw:1234@cluster0-djwuq.gcp.mongodb.net/frameworkdb?retryWrites=true", {
             useNewUrlParser: true
         },
         function (err, db) {
@@ -53,7 +53,7 @@ router.post("/register", (req, res) => {
                 return;
 
             }
-            let dbo = db.db("newDatabase62");
+            let dbo = db.db("frameworkdb");
             let userObj = {
                 rank: rankVar,
                 first_name: first_nameVar,
@@ -83,8 +83,7 @@ router.post("/login", (req, res) => {
     var nameVar = req.body.username; // name คือตัวที่พิมลง postman
     var passwordVar = req.body.password; // password พิมค่าลง postman
     MongoClient.connect(
-        //"mongodb+srv://kanboakeaw:1234@cluster0-djwuq.gcp.mongodb.net/test?retryWrites=true", {
-            "mongodb://kanboakeaw:1234@localhost/frameworkdb?retryWrites=true", { 
+        "mongodb+srv://kanboakeaw:1234@cluster0-djwuq.gcp.mongodb.net/framedbwork?retryWrites=true", {
         useNewUrlParser: true
         },
         function (err, db) {
