@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const MongoClient = require("mongodb").MongoClient;
 
+// Test commit
 router.get("/", (req, res) => {
     res.send({
         status: "login"
@@ -47,11 +48,8 @@ router.post("/register", (req, res) => {
         },
         function (err, db) {
             if (err) {
-
                 res.sendStatus(404);
-
                 return;
-
             }
             let dbo = db.db("newDatabase62");
             let userObj = {
@@ -63,16 +61,34 @@ router.post("/register", (req, res) => {
                 username: nameVar, // username คือค่า attribute ใน db
                 password: passwordVar // password คือค่า attribute ใน db
             };
-            dbo.collection("userLoginTable").insertOne(userObj, function (err, result) {
+            dbo.collection("userLoginTable").findOne({
+                username: nameVar
+            }, function (err, result) {
                 if (err) {
                     res.send({
                         status: false
                     });
                 }
-                res.send({
-                    status: "store success",
-                    name: nameVar //response
-                });
+                console.log(result);
+
+                if (result) {
+                    res.send({
+                        status: false,
+                        message: "มี username นี้แล้ว"
+                    });
+                } else {
+                    dbo.collection("userLoginTable").insertOne(userObj, function (err, result) {
+                        if (err) {
+                            res.send({
+                                status: false
+                            });
+                        }
+                        res.send({
+                            status: "store success",
+                            name: nameVar //response
+                        });
+                    });
+                }
             });
             db.close();
         }
