@@ -1,6 +1,6 @@
 const Express = require('express');
 const bodyParser = require('body-parser');
-//test 
+
 const app = new Express();
 
 app.use(bodyParser.json());
@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.header("Access-Control-Allow-Headers", "Content-Type, x-access-token");
     next();
 });
 
@@ -21,3 +21,6 @@ app.listen(port, () => {
 
 const login = require('./routes/login'); // 
 app.use('/login', login);
+
+const user = require('./routes/user'); // 
+app.use('/user', user);
