@@ -46,6 +46,36 @@ router.get('/list/:pageNumber', (req, res) => {
         }
     );
 });
-
+router.get('/list-count', (req, res) => {
+    MongoClient.connect(
+        "mongodb+srv://weerayut:22374736@cluster0-4wunc.gcp.mongodb.net/newDatabase62?retryWrites=true", {
+            useNewUrlParser: true
+        },
+        function (err, db) {
+            if (err) {
+                res.sendStatus(404);
+                return;
+            }
+            let dbo = db.db("newDatabase62");
+            dbo
+                .collection('userLoginTable')
+                .find({})
+                .count(function (err, result) {
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(404);
+                    }
+                    if (result) {
+                        res.send({
+                            total_item: result
+                        });
+                    } else {
+                        res.sendStatus(404);
+                    }
+                    db.close();
+                });
+        }
+    );
+});
 
 module.exports = router;
